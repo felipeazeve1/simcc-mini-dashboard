@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "nome": "Dr. Carlos Silva",
+    "departamento": "DCET",
+    "area": "Inteligência Artificial",
+    "artigos": 24,
+    "orientandos": 5
+  },
+  {
+    "id": 2,
+    "nome": "Dra. Ana Costa",
+    "departamento": "DCET",
+    "area": "Engenharia de Software",
+    "artigos": 18,
+    "orientandos": 3
+  },
+  {
+    "id": 3,
+    "nome": "Dr. Marcos Souza",
+    "departamento": "DCIS",
+    "area": "Sistemas de Informação",
+    "artigos": 12,
+    "orientandos": 4
+  },
+  {
+    "id": 4,
+    "nome": "Dra. Patrícia Lima",
+    "departamento": "DCET",
+    "area": "Visão Computacional",
+    "artigos": 31,
+    "orientandos": 6
+  },
+  {
+    "id": 5,
+    "nome": "Dra. Eva Azevedo",
+    "departamento": "DCEX",
+    "area": "Análise de Dados",
+    "artigos": 13,
+    "orientandos": 7
+  }
+]
