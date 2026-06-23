@@ -2,12 +2,21 @@ import { useState } from 'react'
 import listaPesquisadores from './dados.json'
 
 function App() {
-  //Estados que vão controlar a busca e os filtros
   const [busca, setBusca] = useState('');
   const [departamento, setDepartamento] = useState('Todos');
-  const pesquisadoresFiltrados = listaPesquisadores.filter((pesquisador) =>{
-    return pesquisador.nome.toLowerCase().includes(busca.toLowerCase());
+  const pesquisadoresFiltrados = listaPesquisadores.filter((pesquisador) => {
+    
+    const bateComONome = pesquisador.nome.toLowerCase().includes(busca.toLowerCase());
+    const bateComODepartamento = departamento === 'Todos' || pesquisador.departamento === departamento;
+    
+    return bateComONome && bateComODepartamento;
   });
+
+    const totalPesquisadores = pesquisadoresFiltrados.length;
+
+    const totalArtigos = pesquisadoresFiltrados.reduce((acumulador, p) => acumulador + p.artigos, 0);
+    const totalOrientados = pesquisadoresFiltrados.reduce((acumulador, p) => acumulador + p.orientandos, 0);
+    const mediaOrientados = totalPesquisadores > 0 ? (totalOrientados / totalPesquisadores).toFixed(1) : 0;
 
   return (
     <div style={{ padding: '15px', fontFamily: 'sans-serif', maxWidth: '800px', margin: '0 auto'}}>
@@ -30,6 +39,40 @@ function App() {
         }}
         />
       </div>
+
+      <div style={{ marginBottom: '20px' }}>
+        <select
+        value={departamento}
+        onChange={(e) => setDepartamento(e.target.value)}
+        style={{
+            width: '100%',
+            padding: '10px',
+            borderRadius: '5px',
+            border: '1px solid #ccc',
+            fontSize: '16px',
+            boxSizing: 'border-box'
+        }}
+        >
+          <option value="Todos">Todos os Departamentos</option>
+          <option value="DCET">DCET</option>
+          <option value="DCIS">DCIS</option>
+          <option value="DCEX">DCEX</option>
+
+        </select>
+      </div>
+
+      {/*Bloco de Métricas Reativas */}
+          <div style={{ display: 'flex', gap: '15px', marginBottom: '20px'}}>
+            <div style={{ flex: 1, padding: '10px', border: '1px solid #ccc', borderRadius: '5px'}}>
+              <strong>Pesquisadores:</strong> {totalPesquisadores}
+            </div>
+            <div style={{ flex: 1, padding: '10px', border: '1px solid #ccc', borderRadius: '5px'}}>
+              <strong>Total de Artigos:</strong> {totalArtigos}
+            </div>
+            <div style={{ flex: 1, padding: '10px', border: '1px solid #ccc', borderRadius: '5px'}}>
+              <strong>Média de Orientados:</strong> {mediaOrientados}
+            </div>
+          </div>
 
     {/* Lista de Pesquisadores */}
       <div style={{marginTop: '20px'}}>
